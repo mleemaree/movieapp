@@ -1,0 +1,57 @@
+$icon-font-path: '../fonts/';
+
+
+$yellow: rgb(255,255,0);
+$green: rgba(57,255,20,1);
+$orange: rgb(255,51,0);
+$purple: rgb(86, 0, 255);
+$gray: rgb(207,207,205);
+
+
+@import 'partials/language';
+@import 'partials/date';
+@import 'partials/menu';
+@import 'partials/cinema';
+@import 'partials/movie';
+
+.loading{
+    visibility:hidden;
+}
+
+@font-face {
+    font-family: myriad;
+    src: url('<%= asset_path('MyriadPro-BoldCond.otf') %>');
+}
+
+@font-face {
+    font-family: m-bold;
+    src: url('<%= asset_path('MyriadPro-Bold.otf') %>');
+}
+@font-face {
+    font-family: m-reg;
+    src: url('<%= asset_path('MyriadPro-Cond.otf') %>');
+}
+
+@font-face {
+    font-family: arial black;
+    src: url('<%= asset_path('Arial-Black.ttf') %>');
+}
+
+@font-face {
+    font-family: English;
+    src: url('<%= asset_path('English.ttf') %>');
+}
+
+.loading{
+  visibility:hidden;
+}
+
+a:hover{
+  color:black !important;
+}
+
+a:focus{
+  outline:none !important;
+  text-decoration:none !important;
+  color:black !important;
+}

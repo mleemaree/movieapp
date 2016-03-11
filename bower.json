@@ -1,0 +1,21 @@
+{
+  "name": "MovieApp",
+  "authors": [
+    "Emily MaRee <lee@mleemaree.com>"
+  ],
+  "description": "Look for Movies by language",
+  "main": "",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "homepage": "mleemaree.com",
+  "private": true,
+  "dependencies": {
+    "fullpage.js": "^2.7.8",
+    "Swiper": "swiper#^3.3.1",
+    "jquery-ui": "^1.11.4",
+    "bootstrap": "^3.3.6",
+    "mustache.js": "mustache#^2.2.1"
+  }
+}

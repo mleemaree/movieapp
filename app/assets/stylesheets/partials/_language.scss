@@ -1,0 +1,52 @@
+// Place all the styles related to the languages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$green: rgba(57,255,20,1);
+
+@mixin language-box($img, $height, $width, $font-size){
+  background: $img;
+  background-size:cover;
+  height:$height;
+  width:$width;
+  clear:none;
+  position:absolute;
+  display:table;
+  .title{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    span{
+      color:$green;
+      font-family: myriad;
+      font-size: $font-size;
+    }
+  }
+}
+
+
+#eng{
+  @include language-box(image-url('languages/english/brando.jpg'), 65%, 43%, 85px);
+  top:0;
+  left:0;
+}
+
+#esp{
+  @include language-box(image-url('languages/spanish/rabal.jpg'), 45%, 55%, 70px);
+  right:0;
+  top:0;
+
+}
+
+#itl{
+  @include language-box(image-url('languages/italian/Mastroianni.png'), 33%, 65%, 40px);
+  bottom:0;
+  left:0;
+  background-position:50% 60%;
+}
+
+#fre{
+  @include language-box(image-url('languages/french/goddard.jpg'), 53%, 33%, 40px);
+  bottom:0;
+  right:0;
+}

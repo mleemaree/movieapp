@@ -1,0 +1,97 @@
+// Place all the styles related to the dates controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$orange: rgb(255,51,0);
+$gray: rgb(207,207,205);
+
+#date-wrapper{
+  font-family:myriad;
+  position:relative;
+}
+
+#date-form-wrapper{
+  height:80vh;
+}
+
+.ui-datepicker-calendar{
+  width:80%;
+  height:60vh;
+  margin:0 auto;
+  text-align:center;
+  thead{
+    padding-top:20px;
+    display:none;
+  }
+  td{
+    font-size:45px;
+    color:black;
+  }
+}
+
+.ui-state-default{
+  &:hover{
+    text-decoration:none;
+  }
+}
+
+.ui-datepicker-header{
+  padding-bottom:20px;
+}
+
+.ui-datepicker-title{
+  text-align:center;
+  font-size: 80px;
+  color: $orange;
+  padding-bottom:2px;
+  text-transform:uppercase;
+}
+
+.ui-datepicker-next{
+  float:right;
+  top:75px;
+  -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+  &:hover{
+    color:$orange;
+    text-decoration:none;
+  }
+}
+
+.ui-datepicker-prev{
+  top:75px;
+  -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+  &:hover{
+    color:$orange;
+    text-decoration:none;
+  }
+}
+
+.ui-corner-all{
+  position:relative;
+  color:black;
+}
+
+.ui-datepicker-year{
+  display:none;
+}
+
+.ui-datepicker-current-day a{
+  -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+  color: $orange;
+}
+
+.ui-datepicker-other-month span{
+  color: $gray;
+}
+
+.movie-available a{
+  color:$orange;
+  &:hover{
+    color:$orange !important;
+    text-decoration:none;
+  }
+}
+

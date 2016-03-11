@@ -1,0 +1,83 @@
+// Place all the styles related to the cinemas controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$purple: rgb(86, 0, 255);
+
+#map{
+  height:80vh;
+}
+
+#cinemas-wrapper{
+  height:80vh;
+  overflow-y: scroll;
+}
+
+.cinemas{
+  height:100%;
+  list-style:none;
+  h3{
+    font-size: 28px;
+    font-family:myriad;
+  }
+}
+
+.cinema-info{
+  min-height:7%;
+  font-family:myriad;
+  h3{
+    font-size: 28px;
+    margin-bottom:0;
+  }
+  span{
+    font-size:16px;
+  }
+  .hidden{
+    display:none;
+  }
+}
+
+.ui-accordion-content-active{
+  &:focus{
+    outline:none;
+  }
+}
+
+.ui-accordion-header-active{
+  color: $purple;
+  margin:0;
+  line-height:2.3em;
+  &:focus{
+    outline:none;
+  }
+}
+
+.ui-accordion-header:focus{
+  outline:none;
+}
+
+.times-wrapper ul{
+  padding-left:0;
+}
+
+.time{
+  display:inline-block;
+  height:50px;
+  background-color:$purple;
+  margin: 0 10px;
+  button{
+    line-height:2.3em;
+    font-size: 24px;
+    padding: 0 10px;
+    color:white;
+    background:none;
+    border:none;
+    &:focus{
+      outline:none;
+    }
+  }
+}
+
+.marker-visible{
+  color:$purple;
+}

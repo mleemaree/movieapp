@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MovieApp</title>
+</head>
+<body>
+<div id="wallet">
+    <span class="lang-wallet"></span>
+    <span class="date-wallet"></span>
+    <span class="time-wallet"></span>
+    <span class="movie-wallet"></span>
+    <span class="cinema-wallet"></span>
+</div>
+<div id="modals"></div>
+<div id="fullpage" class="loading">
+    <div class="section active" id="language" data-anchor="language-anchor">
+        <div class="wrapper">
+            <div id="language">
+                <button class="language-select" type="submit" data-lang="english"
+                onClick="location.href='#menu/menu-anchor'">
+                    <div id="eng" ><div class="title"><span class="eng">ENGLISH</span></div></div>
+                </button>
+                <button class="language-select" data-lang="spanish" type="submit" onClick="location.href='#menu/menu-anchor'">
+                    <div id="esp"><div class="title"><span class="esp">ESPAÑOL</span></div></div>
+                </button>
+                <button class="language-select" data-lang="italian" type="submit" onClick="location.href='#menu/menu-anchor'">
+                    <div id="itl"><div class="title"><span class="itl">ITALIANO</span></div></div>
+                </button>
+                <button class="language-select" data-lang="french" type="submit" onClick="location.href='#menu/menu-anchor'">
+                    <div id="fre"><div class="title"><span class="fre">FRANÇAIS</span></div></div>
+                </button>
+            </div>
+            <div class="title-wrapper">
+                <h1 id="ltit" class="menu-title"><a href="#language-anchor">LANGUAGE</a></h1>
+            </div>
+        </div>
+    </div>
+    <div class="section" id="menu-section" data-anchor="menu">
+        <div id="cine" class="slide" data-anchor="cinema">
+            <div class="cinema-wrapper wrapper">
+                <h1 id="ctit" class="menu-title"><a href="#menu/cinema">CINEMA</a></h1>
+                <div class="map-wrapper row">
+                    <div id="cinemas-wrapper" class="col-xs-12 col-sm-3">
+                        <ul id="cinemas" class="cinemas"></ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                         <div id="map"></div>
+                    </div>
+                    <div class="hidden-xs col-sm-1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide active" data-anchor="menu-anchor">
+            <div class="menu-wrapper wrapper">
+                <div class="outer-menu">
+                    <span class="language">language</span>
+                    <span class="date">date</span>
+                    <span class="cinema">cinema</span>
+                    <span class="movie">movie</span>
+                    <div id="menu-box">
+                        <div class="inner-menu">
+                        <div class="ticket-tags">
+                            <span class="lang-box"></span>
+                            <span class="movie-box"></span>
+                            <span class="date-box"></span>
+                            <span class="time-box"></span>
+                            <span class="cinema-box"></span>
+                        </div>
+                            <%= image_tag "ticket.png", id: 'ticket', class: 'bw'%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dates" class="slide" data-anchor="dates-anchor">
+            <div class="date-wrapper wrapper">
+                <h1 id="dtit" class="menu-title"><a href="#menu/dates-anchor">DATE</a></h1>
+                <div class="container" id="date-wrapper">
+                    <div class="col-xs-12">
+                        <div id="date-form-wrapper">
+                            <form id="date" action="">
+                                <input type="hidden" id="date-input">
+                                <div id="date-picker"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div><!--end Date Container -->
+            </div>
+        </div>
+    </div>
+    <div class="section" data-anchor="movies-anchor">
+        <div class="title-wrapper wrapper">
+            <h1 id="mtit" class="menu-title"><a href="#movies-anchor">MOVIE</a></h1>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper" id="movies-target">
+                    </div><!--end Slide 1 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end of page -->
+<script id="cinemas-template" type="text/template">
+    <li class="cinema-info marker-{{ id }}">
+        <h3 class="marker-title" data-marker="{{ id }}" data-title="{{ name }}">{{ name }}</h3><span>{{ location }}</span>
+        <div class="times-wrapper">
+            <ul class="times-{{ id }}">
+                <!-- put here -->
+            </ul>
+        </div>
+    </li>
+</script>
+
+<script id="times-template" type="text/template">
+    <li class="time hidden"><button type="submit" data-time="{{ datetime }}" data-show="{{ time }}">{{ time }}</button></li>
+</script>
+
+<script id="movie-template" type="text/template">
+    <div class="movie-poster swiper-slide" style="background-image: url('{{ poster }}');">
+        <div class="poster-wrapper">
+            <div class="col-xs-12 col-sm-5 movie-info">
+                <div>
+                    <span class="title">{{ title }}</span>
+                </div>
+                <div class="row stats">
+                    <div class="col-xs-3"><span class="stars">{{ rating }}</span></div>
+                    <div class="col-xs-3"><span class="rating">R</span></div>
+                    <div class="col-xs-6"><span class="length">{{ length }}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 summary-wrapper">
+                        <span class="summary">{{ summary }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8">
+                        <ul class="movie-details">
+                            <li><span class="det-tit">Country: </span><span class="tags">{{ country }}</span></li>
+                            <li><span class="det-tit">Starring: </span><span class="actors">{{ actor }}</span></li>
+                            <li><span class="det-tit">Genres: </span><span class="genres">{{ genre }}</span></li>
+                        </ul>
+                    </div>
+                    <div class="hidden-xs col-sm-4"></div>
+                </div>
+                <div class="row" id="buttons-trailer">
+                    <div class="hidden-xs col-sm-1"></div>
+                    <div class="col-xs-12 col-sm-5 trailer-wrapper">
+                         <button id="trailer-{{ id }}" class="trailer" data-toggle="modal" data-target="#{{ id }}" data-vid="{{ trailer }}">Watch Trailer</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 trailer-wrapper">
+                        <button class="select {{ id }}" data-id="{{ id }}">Select Movie</button>
+                    </div>
+                    <div class="hidden-xs col-sm-1"></div>
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-8"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</script>
+<script id="movie-modal" type="text/template">
+    <div id="{{ id }}" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <iframe width="965" height="580" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+    <!-- BEGIN Google Map -->
+     <script>
+       function initMap() {
+        var mapDiv = document.getElementById('map');
+        var options = {         
+            zoom: 14,
+             styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+        }
+        var map = new google.maps.Map(mapDiv, options);
+
+        //Yelmo Cines Icaria Marker
+
+        var yelmo = new google.maps.Marker({
+            position: new google.maps.LatLng(41.390749, 2.198057),
+            title: 'Yelmo Icaria',
+            id: '1',
+            map: map,
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Yelmo Cines Icaria</strong><br>Calle Salvador Espriu, 61<br>08006 Barcelona<br>'    
+        });
+
+        // Verdi HD Marker
+        
+        var verdiHD = new google.maps.Marker({
+            position: new google.maps.LatLng(41.402754, 2.159574),
+            title: 'Verdi HD',
+            map: map,
+            id: '3',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Verdi HD</strong><br>Carrer de Torrijos, 14<br>08012 Barcelona<br>'   
+        });
+
+        // Renoir Floridablanca Marker
+        
+        var floridablanca = new google.maps.Marker({
+            position: new google.maps.LatLng(41.381684, 2.162566),
+            title: 'Renoir Floridablanca',
+            map: map,
+            id: '2',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Renoir Floridablanca</strong><br>Calle Floridablanca, 135<br>08011 Barcelona<br>'    
+        });
+
+        // Cinema Malda Marker
+         
+        var malda = new google.maps.Marker({
+           position: new google.maps.LatLng(41.383169, 2.173896),
+            title: 'Cinema Maldà',
+            map: map,
+            id: '7',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Cinema Maldà</strong><br>Carrer del Pi, 5<br>08002 Barcelona<br>'    
+        });
+
+        // Filmoteca de Catalunya Marker
+        
+         var filmoteca = new google.maps.Marker({
+           position: new google.maps.LatLng(41.378421, 2.171233),
+            title: 'Filmoteca de Catalunya',
+            map: map,
+            id: '8',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Filmoteca de Catalunya</strong><br>Plaça de Salvador Seguí, 1<br>08001 Barcelona<br>'    
+        });
+
+        // Phenomena Marker
+        
+         var phenomena = new google.maps.Marker({
+           position: new google.maps.LatLng(41.409098, 2.171725),
+            title: 'Phenomena',
+            map: map,
+            id: '4',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Phenomena</strong><br>C/ Sant Antoni Maria Claret, 168<br>08025 Barcelona<br>'    
+        });
+
+        // Balmes Multicines Marker
+        
+         var balmes = new google.maps.Marker({
+           position: new google.maps.LatLng(41.407180, 2.138601),
+            title: 'Balmes Multicines',
+            map: map,
+            id: '9',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Balmes Multicines</strong><br>Carrer de Balmes, 422-424<br>08022 Barcelona<br>'    
+        });
+
+        // Verdi Park HD Multicines Marker
+        
+         var verdipark = new google.maps.Marker({
+           position: new google.maps.LatLng(41.404427, 2.157682),
+            title: 'Verdi Park HD',
+            map: map,
+            id: '10',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Verdi Park HD</strong><br>Calle Torrijos 49<br>08012 Barcelona<br>'    
+        });
+
+        // Cine Texas Multicines Marker
+        
+         var texas = new google.maps.Marker({
+           position: new google.maps.LatLng(41.402039, 2.163669),
+            title: 'Cines Texas',
+            map: map,
+            id: '6',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Cines Texas</strong><br>Carrer de Bailèn, 205<br>08037 Barcelona<br>'    
+        });
+
+        // Méliès Cinemes Multicines Marker
+        
+         var melies = new google.maps.Marker({
+           position: new google.maps.LatLng(41.385198, 2.156976),
+            title: 'Méliès Cinemes',
+            map: map,
+            id: '5',
+            icon: '<%= image_url('icons/marker.png') %>',
+            contentString:'<strong>Méliès Cinemes</strong><br>Carrer de Villarroel, 102<br>08011 Barcelona<br>'    
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+        var markers = [melies, texas, verdipark, balmes, phenomena, filmoteca, malda, floridablanca, verdiHD, yelmo];
+
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+
+        map.fitBounds(bounds);
+
+        for(var i = 0, marker; marker = markers[i]; i++){
+            marker.setVisible(false);
+            google.maps.event.addListener(marker, 'click', function(e){
+
+                $('.cinema-info')
+                    .removeClass('marker-visible')
+                    .find('ul')
+                    .children()
+                    .addClass('hidden');
+
+
+                infowindow.close();
+                infowindow = new google.maps.InfoWindow({   
+                    content: this.contentString                           
+                });
+
+                map.setZoom(16);
+                map.setCenter(this.getPosition());
+
+                infowindow.open(map, this);
+
+                switch(this.id){
+                    case "1":
+                        $('.marker-1')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "2":
+                        $('.marker-2')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "3":
+                        $('.marker-3')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "4":
+                        $('.marker-4')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "5":
+                        $('.marker-5')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "6":
+                        $('.marker-6')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "7":
+                        $('.marker-7')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "8":
+                        $('.marker-8')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "9":
+                        $('.marker-9')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    case "10":
+                        $('.marker-10')
+                            .addClass('marker-visible')
+                            .find('ul');
+                        break;
+                    default:
+                        console.log("no cinema");
+                }
+            }); 
+        }
+
+        MovieApp.markerShow = function(cinemas){
+            cinemas = cinemas || MovieApp.movie_selection.cinemas.cinemas;
+
+            var markers = [melies, texas, verdipark, balmes, phenomena, filmoteca, malda, floridablanca, verdiHD, yelmo];
+            markers.forEach(function(marker){
+                marker.setVisible(false);
+            });
+
+            cinemas.forEach(function(cinema){
+                switch(cinema.id){
+                    case 1:
+                        yelmo.setVisible(true);
+                        break;
+                    case 2:
+                        floridablanca.setVisible(true);
+                        break;
+                    case 3:
+                        verdiHD.setVisible(true);
+                        break;
+                    case 4:
+                        phenomena.setVisible(true);
+                        break;
+                    case 5:
+                        melies.setVisible(true);
+                        break;
+                    case 6:
+                        texas.setVisible(true);
+                        break;
+                    case 7:
+                        malda.setVisible(true);
+                        break;
+                    case 8:
+                        filmoteca.setVisible(true);
+                        break;
+                    case 9:
+                        balmes.setVisible(true);
+                        break;
+                    case 10:
+                        verdipark.setVisible(true);
+                        break;
+                    default:
+                        console.log("no cinema");
+                }
+            });
+        }
+
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+    <!--END Google Map -->  
+
+
+
+</body>
+</html>

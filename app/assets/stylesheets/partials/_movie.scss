@@ -1,0 +1,132 @@
+// Place all the styles related to the movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$yellow: rgb(255,255,0);
+$gray: rgb(207,207,205);
+
+.poster-wrapper{
+  background: -webkit-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+  margin: 0 auto !important;
+  height:80vh;
+}
+
+.swiper-container{
+  width:90%;
+  height:80vh;
+  bottom: 5vh;
+}
+
+#movies-target{
+  width:100%;
+}
+
+.movie-info{
+  height:80vh;
+  position:relative;
+}
+
+.movie-poster{
+  height:80vh;
+  width:90%;
+  margin: 0 auto;
+  background-color:gray;
+  position:relative;
+  background-size:cover;
+  text-align:left;
+  font-family:m-bold;
+}
+
+.title{
+  display:block;
+  font-size:35px;
+  color:#0033cc;
+  text-transform:uppercase;
+  line-height: 1em;
+  line-height: 1.3em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  &:first-line{
+    font-size:60px;
+    color: $yellow;
+  }
+}
+
+.stats{
+  font-size:18px;
+  color: $yellow;
+  padding-left:5px;
+}
+
+.rating{
+  border:2px solid $yellow;
+  padding:2px 3px 0;
+}
+
+.summary-wrapper{
+  padding:20px;
+}
+
+.summary{
+  font-family:m-reg;
+  font-size:18px;
+  color: $gray;
+}
+
+.movie-details{
+  list-style:none;
+  font-family:m-reg;
+  font-size:18px;
+  padding-left:5px;
+}
+
+.det-tit{
+  color:$gray;
+}
+
+.actors, .genres, .tags{
+  color:white;
+  padding-left:5px;
+}
+
+.trailer, .select{
+  font-size:16px;
+  background:transparent;
+  border:3px solid $yellow;
+  color:yellow;
+  text-transform:uppercase;
+  padding: 8px 30px;
+  white-space:nowrap;
+  &:focus{
+    outline:none;
+  }
+}
+
+#buttons-trailer{
+  position:absolute;
+  bottom:15vh;
+}
+
+.modal-dialog{
+    width: 1000px !important;
+}
+
+.modal-content, .modal-body{
+    background:none !important;
+    box-shadow:none !important;
+    border:none !important;
+}
+
+.modal-backdrop.in{
+    opacity: 0.9 !important;
+}
+
+@media screen and (max-width: 992px) { 
+  #buttons-trailer{
+    bottom:5vh;
+  }
+
+}
