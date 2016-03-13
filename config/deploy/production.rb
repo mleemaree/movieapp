@@ -21,7 +21,8 @@
 # role :web, %w{ssh-457893-mlee@colortwister.abcde.biz}
 # role :db,  %w{deploy@example.com}
 
-
+server "talkie.mleemare.com"
+set :deploy_to, "webseiten/mleemaree/talkie"
 
 # Configuration
 # =============

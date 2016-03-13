@@ -3,7 +3,6 @@ class Movie < ActiveRecord::Base
   has_many :showings, dependent: :destroy
   has_many :cinemas, :through => :showings
   validates :title, presence: true
-  validates :title, uniqueness: true
   validates :country, presence: true
   validates :rating, numericality: true
   validates :user_rating, numericality: true
